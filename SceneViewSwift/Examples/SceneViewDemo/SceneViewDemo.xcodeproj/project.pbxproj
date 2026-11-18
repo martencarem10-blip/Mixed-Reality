@@ -13,6 +13,7 @@
 		A10004 /* ShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20004; };
 		A10005 /* ARDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20005; };
 		A10006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20006; };
+		A10007 /* SceneViewSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A90001 /* SceneViewSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10007 /* SceneViewSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +132,9 @@
 				Base,
 			);
 			mainGroup = A50001;
+			packageReferences = (
+				A90002 /* XCLocalSwiftPackageReference "../.." */,
+			);
 			productRefGroup = A50002;
 			projectDirPath = "";
 			projectRoot = "";
@@ -299,6 +304,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A90002 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		A90001 /* SceneViewSwift */ = {
