@@ -6,6 +6,16 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      runner:
+        description: "macOS Runner"
+        required: false
+        default: "macos-latest"
+        type: choice
+        options:
+          - macos-latest
+          - macos-15
+          - macos-26
 
 permissions:
   contents: write
@@ -17,7 +27,7 @@ concurrency:
 jobs:
   build-ipa:
     name: Build iOS IPA
-    runs-on: macos-15
+    runs-on: ${{ inputs.runner || 'macos-latest' }}
     timeout-minutes: 45
 
     env:
