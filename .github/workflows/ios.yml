@@ -1,31 +1,6 @@
 name: iOS CI
 
 on:
-  # No `sceneview-core/**` (dropped 2026-09; #1295 had added it): nothing built
-  # here consumes the KMP core — SceneViewSwift/Package.swift has no dependency
-  # on it and there is no XCFramework; the Swift sources only name it in
-  # comments about hand-ported math. A core-only change therefore cannot alter
-  # this workflow's result, yet it cost a ~15-min macOS run on every core PR.
-  # The core's own iOS (Kotlin/Native) compile stays covered by ci.yml's
-  # `compile-kmp` job. Re-add the path the day Swift links the core.
-  push:
-    branches: [main]
-    paths:
-      - 'SceneViewSwift/**'
-      - 'samples/ios-demo/**'
-      - 'assets/manifest.json'
-      - 'tools/fetch-assets.sh'
-      - '.github/workflows/ios.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'SceneViewSwift/**'
-      - 'samples/ios-demo/**'
-      - 'assets/manifest.json'
-      - 'tools/fetch-assets.sh'
-      - '.github/workflows/ios.yml'
-  schedule:
-    - cron: '30 3 * * *'
   workflow_dispatch:
 
 # Cancel only a genuinely superseded PR run, never a push to `main` — same

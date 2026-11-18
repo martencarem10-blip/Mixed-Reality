@@ -24,7 +24,6 @@
 		A20005 /* ARDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDemoView.swift; sourceTree = "<group>"; };
 		A20006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A30001 /* SceneViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A30002 /* SceneViewSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SceneViewSwift; path = ../../; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +42,6 @@
 			isa = PBXGroup;
 			children = (
 				A50003 /* SceneViewDemo */,
-				A50004 /* Packages */,
 				A50002 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,14 +63,6 @@
 				A20006 /* Assets.xcassets */,
 			);
 			path = SceneViewDemo;
-			sourceTree = "<group>";
-		};
-		A50004 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				A30002 /* SceneViewSwift */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		A50005 /* Views */ = {
