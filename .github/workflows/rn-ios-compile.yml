@@ -81,34 +81,6 @@ name: React Native iOS bridge compile
 # SceneViewSwift API and the real React API, which is the #2067 defect class.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'react-native/react-native-sceneview/ios/**'
-      - 'react-native/react-native-sceneview/react-native-sceneview.podspec'
-      - 'react-native/react-native-sceneview/package.json'
-      - 'react-native/react-native-sceneview/package-lock.json'
-      # The React module the type-check imports is produced from the demo's
-      # dependency graph, so the demo's manifests are inputs to this guard.
-      - 'samples/react-native-demo/package.json'
-      - 'samples/react-native-demo/package-lock.json'
-      - 'samples/react-native-demo/ios/Podfile'
-      - 'samples/react-native-demo/ios/Podfile.lock'
-      - 'SceneViewSwift/**'
-      - '.github/workflows/rn-ios-compile.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'react-native/react-native-sceneview/ios/**'
-      - 'react-native/react-native-sceneview/react-native-sceneview.podspec'
-      - 'react-native/react-native-sceneview/package.json'
-      - 'react-native/react-native-sceneview/package-lock.json'
-      - 'samples/react-native-demo/package.json'
-      - 'samples/react-native-demo/package-lock.json'
-      - 'samples/react-native-demo/ios/Podfile'
-      - 'samples/react-native-demo/ios/Podfile.lock'
-      - 'SceneViewSwift/**'
-      - '.github/workflows/rn-ios-compile.yml'
   workflow_dispatch:
 
 concurrency:

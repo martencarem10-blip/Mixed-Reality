@@ -31,18 +31,6 @@ name: Bridge iOS Compile
 # which is the regression #2065 is about.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'flutter/sceneview_flutter/ios/**'
-      - 'SceneViewSwift/**'
-      - '.github/workflows/bridge-ios-compile.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'flutter/sceneview_flutter/ios/**'
-      - 'SceneViewSwift/**'
-      - '.github/workflows/bridge-ios-compile.yml'
   workflow_dispatch:
 
 concurrency:
