@@ -30,8 +30,6 @@ name: App Store catch-up
 # Same App Store Connect secrets as app-store.yml; no new secret.
 
 on:
-  schedule:
-    - cron: '23 */3 * * *'
   workflow_dispatch:
     inputs:
       supersede:

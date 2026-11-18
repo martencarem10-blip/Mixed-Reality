@@ -1,28 +1,6 @@
 name: Build sample APKs
 
 on:
-  # Release tags and manual dispatch only. Its one unique output is the pair of
-  # debug APKs attached to a GitHub Release.
-  #
-  # No `push: branches: [main]` any more (2026-09): ci.yml's `build` job already
-  # runs the same `:samples:android-demo:assembleDebug` +
-  # `:samples:android-tv-demo:assembleDebug` on every push to `main`, so the
-  # main-push run here was the same build a second time (90 of 125 merges over
-  # 2026-09-12..26, never red), and nothing reads its `sample-apks` artifact.
-  #
-  # .claude/scripts/tag-release.sh pushes release tags with GITHUB_TOKEN, and a
-  # GITHUB_TOKEN push triggers no workflow — this is why it also dispatches
-  # release.yml / play-store.yml / app-store.yml on the tag ref by hand, and
-  # now this workflow too. Because that dispatch passes the tag as `--ref`,
-  # `github.ref` resolves to `refs/tags/vX.Y.Z` exactly as it would on a real
-  # tag push, so the two release-upload steps below key off
-  # `startsWith(github.ref, 'refs/tags/v')` alone (no `event_name` check) —
-  # same pattern as release.yml and app-store.yml. Without this wiring, every
-  # release from v4.35.0 through v4.39.0 shipped with no APKs attached to its
-  # GitHub Release.
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
 
 # This workflow uploads GitHub Release assets via softprops/action-gh-release on

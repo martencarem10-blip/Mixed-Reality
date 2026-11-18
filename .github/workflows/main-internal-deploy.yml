@@ -40,17 +40,6 @@ name: Deploy Demo to Play Internal (per-push)
 # below makes it near-impossible within this workflow anyway.
 
 on:
-  push:
-    # `branches: [main]` is required — `paths:` alone does NOT scope the push
-    # trigger to a branch (see telemetry-ci.yml for the same footgun note).
-    branches: [main]
-    paths:
-      - 'sceneview/**'
-      - 'arsceneview/**'
-      - 'sceneview-core/**'
-      - 'samples/android-demo/**'
-      - 'samples/common/**'
-      - 'assets/**'
   workflow_dispatch:
 
 # Keep only the LATEST commit's build: a newer push cancels any in-progress

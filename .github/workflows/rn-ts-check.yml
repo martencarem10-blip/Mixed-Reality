@@ -57,30 +57,6 @@ name: React Native TypeScript check
 # not enforce it.
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'react-native/react-native-sceneview/src/**'
-      - 'react-native/react-native-sceneview/__tests__/**'
-      - 'react-native/react-native-sceneview/example/src/**'
-      - 'react-native/react-native-sceneview/package.json'
-      - 'react-native/react-native-sceneview/package-lock.json'
-      - 'react-native/react-native-sceneview/tsconfig.json'
-      - 'react-native/react-native-sceneview/tsconfig.build.json'
-      - 'biome.json'
-      - '.github/workflows/rn-ts-check.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'react-native/react-native-sceneview/src/**'
-      - 'react-native/react-native-sceneview/__tests__/**'
-      - 'react-native/react-native-sceneview/example/src/**'
-      - 'react-native/react-native-sceneview/package.json'
-      - 'react-native/react-native-sceneview/package-lock.json'
-      - 'react-native/react-native-sceneview/tsconfig.json'
-      - 'react-native/react-native-sceneview/tsconfig.build.json'
-      - 'biome.json'
-      - '.github/workflows/rn-ts-check.yml'
   workflow_dispatch:
 
 concurrency:

@@ -10,10 +10,7 @@ name: Discord Notifications
 #   5. Name: DISCORD_WEBHOOK_URL   Value: <the webhook URL>
 
 on:
-  release:
-    types: [published]
-  issues:
-    types: [opened]
+  workflow_dispatch:
 
 # One notification run per triggering event; a duplicate webhook delivery
 # (e.g. an issue edited-then-reopened storm) cancels the stale in-flight run.

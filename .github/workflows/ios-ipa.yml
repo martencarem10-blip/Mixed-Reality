@@ -10,11 +10,11 @@ on:
       runner:
         description: "macOS Runner"
         required: false
-        default: "macos-latest"
+        default: "macos-15"
         type: choice
         options:
-          - macos-latest
           - macos-15
+          - macos-latest
           - macos-26
 
 permissions:
@@ -27,7 +27,7 @@ concurrency:
 jobs:
   build-ipa:
     name: Build iOS IPA
-    runs-on: ${{ inputs.runner || 'macos-latest' }}
+    runs-on: ${{ inputs.runner || 'macos-15' }}
     timeout-minutes: 45
 
     env:
@@ -38,29 +38,53 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Select Xcode
+      - name: Select Xcode (26+)
         run: |
+          set -euo pipefail
+          echo "Available Xcode installations:"
           ls -d /Applications/Xcode*.app || true
-          XCODE_APP=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -n 1 || true)
-          if [ -n "$XCODE_APP" ]; then
-            sudo xcode-select -s "$XCODE_APP/Contents/Developer"
-          else
-            sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+          XCODE_APP=""
+          for candidate in $(ls -d /Applications/Xcode_26*.app /Applications/Xcode_27*.app /Applications/Xcode.app 2>/dev/null | sort -V -r); do
+            VER=$("$candidate/Contents/Developer/usr/bin/xcodebuild" -version 2>/dev/null | awk '/^Xcode /{print $2}' || echo "0")
+            MAJOR=${VER%%.*}
+            if [ "${MAJOR:-0}" -ge 26 ]; then
+              XCODE_APP="$candidate"
+              break
+            fi
+          done
+
+          if [ -z "$XCODE_APP" ]; then
+            echo "::error::Xcode 26+ is required for SceneViewSwift (RealityKit PostProcessEffect APIs), but none was found on this runner."
+            exit 1
           fi
+
+          sudo xcode-select -s "$XCODE_APP/Contents/Developer"
           echo "Using Xcode: $(xcode-select -p)"
           xcodebuild -version
 
+      - name: Cache Swift Package dependencies
+        uses: actions/cache@v4
+        with:
+          path: SourcePackages
+          key: spm-ios-${{ runner.os }}-${{ hashFiles('SceneViewSwift/Package.resolved') }}
+          restore-keys: |
+            spm-ios-${{ runner.os }}-
+
       - name: Resolve Swift Package dependencies
         run: |
+          set -euo pipefail
           xcodebuild -resolvePackageDependencies \
             -project "$PROJECT_PATH" \
             -scheme "$SCHEME" \
-            -clonedSourcePackagesDirPath SourcePackages
+            -clonedSourcePackagesDirPath SourcePackages \
+            -skipPackagePluginValidation \
+            -skipMacroValidation
 
       - name: Build Release .app (Unsigned for IPA)
         run: |
-          set -o pipefail
-          xcodebuild \
+          set -euo pipefail
+          if ! xcodebuild \
             -project "$PROJECT_PATH" \
             -scheme "$SCHEME" \
             -configuration Release \
@@ -71,23 +95,36 @@ jobs:
             -skipPackagePluginValidation \
             -skipMacroValidation \
             ONLY_ACTIVE_ARCH=NO \
+            VALIDATE_PRODUCT=NO \
             CODE_SIGN_STYLE=Manual \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
             PROVISIONING_PROFILE_SPECIFIER="" \
-            build
+            build 2>&1 | tee "$RUNNER_TEMP/xcodebuild.log"; then
+            echo "::error::xcodebuild failed. Compiler error summary:"
+            grep -E "error:|fatal error:" "$RUNNER_TEMP/xcodebuild.log" | tail -n 40 || true
+            exit 1
+          fi
 
       - name: Package IPA
         run: |
+          set -euo pipefail
+          rm -rf Payload output
           mkdir -p Payload output
           APP_PATH=$(find build/Build/Products/Release-iphoneos -maxdepth 1 -name "*.app" | head -n 1)
-          if [ -z "$APP_PATH" ]; then
-            echo "::error::Built .app bundle not found!"
+          if [ -z "$APP_PATH" ] || [ ! -d "$APP_PATH" ]; then
+            echo "::error::Built .app bundle not found in build/Build/Products/Release-iphoneos!"
+            ls -la build/Build/Products/ || true
             exit 1
           fi
-          cp -R "$APP_PATH" Payload/
-          zip -r "output/${SCHEME}-unsigned.ipa" Payload
+          if [ ! -f "$APP_PATH/Info.plist" ]; then
+            echo "::error::Generated Info.plist is missing inside $APP_PATH!"
+            exit 1
+          fi
+          cp -a "$APP_PATH" Payload/
+          zip -qry "output/${SCHEME}-unsigned.ipa" Payload
+          unzip -tq "output/${SCHEME}-unsigned.ipa"
           ls -lh output/
 
       - name: Upload iOS IPA Artifact

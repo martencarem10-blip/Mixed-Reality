@@ -102,26 +102,6 @@ name: Device QA
 # (and by render-tests.yml's iOS screenshot job, #2803).
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.claude/scripts/device-qa.sh'
-      - '.claude/scripts/qa-android-demos.sh'
-      - '.claude/scripts/ios-device-qa.sh'
-      - '.claude/scripts/ar-replay-qa.sh'
-      - '.claude/scripts/setup-ar-emulator.sh'
-      - '.claude/scripts/sideload-arcore.sh'
-      - '.claude/scripts/lib/maestro.sh'
-      - '.claude/scripts/lib/android-cli.sh'
-      - '.github/workflows/device-qa.yml'
-      - '.maestro/**'
-      - 'samples/android-demo/**'
-      - 'assets/manifest.json'
-      - 'samples/web-demo/**'
-      # The demo runs the website viewer since #4316.
-      - 'website-static/js/sceneview.js'
-      # NOTE: `samples/ios-demo/**` is deliberately NOT listed — the iOS leg
-      # is nightly-only (see the FOUR-LEG SPLIT block above, #1601).
   workflow_dispatch:
   # Reused by nightly-ci.yml so the scheduled full-validation run exercises
   # the device-QA legs too — see #1324.

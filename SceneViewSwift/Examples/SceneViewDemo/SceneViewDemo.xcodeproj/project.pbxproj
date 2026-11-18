@@ -14,6 +14,7 @@
 		A10005 /* ARDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20005; };
 		A10006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20006; };
 		A10007 /* SceneViewSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A90001 /* SceneViewSwift */; };
+		A10008 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20007; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		A20004 /* ShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
 		A20005 /* ARDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDemoView.swift; sourceTree = "<group>"; };
 		A20006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20007 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		A30001 /* SceneViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,6 +73,7 @@
 				A20003 /* ExploreView.swift */,
 				A20004 /* ShapesView.swift */,
 				A20005 /* ARDemoView.swift */,
+				A20007 /* AboutView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				A10003 /* ExploreView.swift in Sources */,
 				A10004 /* ShapesView.swift in Sources */,
 				A10005 /* ARDemoView.swift in Sources */,
+				A10008 /* AboutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

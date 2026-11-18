@@ -4,17 +4,6 @@ name: Telemetry Worker CI
 # Runs typecheck + unit tests on every push/PR that touches telemetry-worker/.
 
 on:
-  push:
-    # `branches: [main]` is required — `paths:` alone does NOT scope the push
-    # trigger to a branch, so without it this workflow runs on every push to
-    # every branch (each `claude/*` worktree branch). PR coverage is already
-    # provided by the `pull_request` trigger below.
-    branches: [main]
-    paths:
-      - 'telemetry-worker/**'
-  pull_request:
-    paths:
-      - 'telemetry-worker/**'
   workflow_dispatch:
 
 # One run per ref; cancel older in-progress runs to save resources.

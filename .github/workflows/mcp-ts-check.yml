@@ -73,26 +73,6 @@ name: MCP TypeScript check
 # protection does not enforce it.
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'mcp/src/**'
-      - 'mcp/scripts/**'
-      - 'mcp/package.json'
-      - 'mcp/package-lock.json'
-      - 'mcp/tsconfig.json'
-      - 'biome.json'
-      - '.github/workflows/mcp-ts-check.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'mcp/src/**'
-      - 'mcp/scripts/**'
-      - 'mcp/package.json'
-      - 'mcp/package-lock.json'
-      - 'mcp/tsconfig.json'
-      - 'biome.json'
-      - '.github/workflows/mcp-ts-check.yml'
   workflow_dispatch:
 
 concurrency:

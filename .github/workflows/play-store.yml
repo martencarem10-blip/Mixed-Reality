@@ -31,9 +31,6 @@ name: Deploy Demo to Play Store
 # versionCode scheme — see the `Calculate version` step for the invariant.
 
 on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
     inputs:
       track:

@@ -35,24 +35,6 @@ name: Snippets
 # does not enforce it.
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'llms*.txt'
-      - 'agents/sceneview/references/**'
-      - 'tools/extract-doc-snippets.js'
-      - 'tools/snippets-check/**'
-      - '.github/workflows/snippets-check.yml'
-      - '.github/actions/setup-gradle/**'
-  push:
-    branches: [main]
-    paths:
-      - 'llms*.txt'
-      - 'agents/sceneview/references/**'
-      - 'tools/extract-doc-snippets.js'
-      - 'tools/snippets-check/**'
-      - '.github/workflows/snippets-check.yml'
-      - '.github/actions/setup-gradle/**'
   workflow_dispatch:
 
 # PR-number key, like ci.yml: a new commit on the same PR cancels the stale

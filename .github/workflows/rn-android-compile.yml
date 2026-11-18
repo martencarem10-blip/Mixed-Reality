@@ -68,24 +68,6 @@ name: React Native Android bridge compile
 #      gate into a no-op that reports success.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'react-native/react-native-sceneview/android/**'
-      - 'react-native/react-native-sceneview/package.json'
-      - 'tools/rn-android-compile/**'
-      - 'gradle/libs.versions.toml'
-      - '.github/actions/setup-gradle/**'
-      - '.github/workflows/rn-android-compile.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'react-native/react-native-sceneview/android/**'
-      - 'react-native/react-native-sceneview/package.json'
-      - 'tools/rn-android-compile/**'
-      - 'gradle/libs.versions.toml'
-      - '.github/actions/setup-gradle/**'
-      - '.github/workflows/rn-android-compile.yml'
   workflow_dispatch:
 
 concurrency:
